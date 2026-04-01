@@ -2,7 +2,7 @@
 <html lang="fr" dir="ltr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Pizza Pocket — Système de Commandes</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -13,7 +13,6 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--dark);min-height:100vh;overflow-x:hidden}
 
-/* SPLASH */
 #splash{position:fixed;inset:0;z-index:9999;background:linear-gradient(145deg,var(--dark),var(--teal));display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;transition:opacity .6s,transform .6s}
 #splash.hide{opacity:0;pointer-events:none;transform:scale(1.05)}
 .sp-pizza{font-size:60px;animation:bob 1s ease infinite alternate}
@@ -25,7 +24,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--dark);
 .sp-bar::after{content:'';display:block;height:100%;width:0;background:var(--gold);border-radius:99px;animation:ld 1.6s ease forwards}
 @keyframes ld{to{width:100%}}
 
-/* PIN */
 #pinScreen{position:fixed;inset:0;z-index:500;background:linear-gradient(145deg,var(--dark),var(--teal));display:none;align-items:center;justify-content:center;padding:20px}
 #pinScreen.active{display:flex}
 .pin-card{background:rgba(255,255,255,.07);border:1px solid rgba(240,192,64,.3);border-radius:28px;padding:36px 28px;width:100%;max-width:340px;text-align:center;backdrop-filter:blur(18px);animation:popUp .5s cubic-bezier(.34,1.56,.64,1) both}
@@ -40,13 +38,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--dark);
 @keyframes shk{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
 .pin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:10px}
 .pin-btn{padding:17px;border:none;border-radius:14px;background:rgba(255,255,255,.1);color:#fff;font-family:'Playfair Display',serif;font-size:20px;font-weight:700;cursor:pointer;transition:all .15s}
-.pin-btn:hover{background:rgba(255,255,255,.17)}
-.pin-btn:active{transform:scale(.91);background:var(--gold);color:var(--dark)}
+.pin-btn:active{transform:scale(.91)}
 .pin-del{background:rgba(200,41,26,.3);color:var(--red)}
-.pin-del:hover{background:rgba(200,41,26,.45)!important}
 .pin-err{color:var(--red);font-size:12px;font-weight:600;min-height:18px;margin-top:2px}
 
-/* HOME */
 #home{min-height:100vh;background:linear-gradient(145deg,var(--dark),var(--teal));display:none;align-items:center;justify-content:center;padding:24px}
 #home.show{display:flex}
 .home-card{background:rgba(255,255,255,.06);border:1px solid rgba(240,192,64,.22);border-radius:30px;padding:44px 32px;width:100%;max-width:400px;text-align:center;backdrop-filter:blur(16px);animation:popUp .6s cubic-bezier(.34,1.56,.64,1) both}
@@ -57,39 +52,30 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--dark);
 .hbtn{padding:19px 22px;border:none;border-radius:16px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px;transition:all .2s}
 .hbtn:active{transform:scale(.96)}
 .hbtn-admin{background:var(--gold);color:var(--dark);box-shadow:0 4px 22px rgba(240,192,64,.32)}
-.hbtn-admin:hover{box-shadow:0 6px 30px rgba(240,192,64,.5);transform:translateY(-1px)}
 .hbtn-display{background:var(--teal2);color:#fff;border:1px solid rgba(255,255,255,.13)}
-.hbtn-display:hover{background:#13918a;transform:translateY(-1px)}
 .home-info{margin-top:24px;font-size:11px;color:rgba(255,255,255,.28);line-height:2}
 
-/* SCREEN */
 .screen{display:none;min-height:100vh;flex-direction:column}
 .screen.active{display:flex}
 
-/* TOPBAR */
 .topbar{background:var(--teal);padding:0 14px;height:58px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;box-shadow:0 2px 18px rgba(0,0,0,.22)}
 .tb-brand{font-family:'Playfair Display',serif;font-size:19px;font-weight:900;color:var(--gold)}
 .tb-brand span{color:#fff}
 .tb-right{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
 .badge{background:var(--red);color:#fff;font-size:10px;font-weight:700;padding:3px 9px;border-radius:99px}
 .bsm{padding:6px 11px;border:none;border-radius:9px;font-size:11px;font-weight:600;cursor:pointer;background:rgba(255,255,255,.11);color:#fff;transition:background .15s}
-.bsm:hover{background:rgba(255,255,255,.2)}
 .bsm-gold{background:var(--gold);color:var(--dark)}
-.bsm-gold:hover{background:#f5cb4a}
 
-/* ADMIN BODY */
 .admin-body{flex:1;padding:14px;padding-bottom:36px;max-width:700px;width:100%;margin:0 auto}
 .slbl{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--teal2);margin:18px 0 10px;display:flex;align-items:center;gap:7px}
 .slbl::after{content:'';flex:1;height:1px;background:rgba(12,95,90,.14)}
 
-/* NUMBER GRID 00-99 */
 .num-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:5px;margin-bottom:2px}
-.num-btn{aspect-ratio:1;background:#fff;border:2px solid transparent;border-radius:10px;font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:var(--teal);cursor:pointer;box-shadow:0 1px 5px rgba(0,0,0,.07);transition:all .15s cubic-bezier(.34,1.56,.64,1);display:flex;align-items:center;justify-content:center}
-.num-btn:hover{border-color:var(--gold);transform:translateY(-2px) scale(1.07);box-shadow:0 4px 12px rgba(12,95,90,.18)}
+.num-btn{aspect-ratio:1;background:#fff;border:2px solid transparent;border-radius:10px;font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:var(--teal);cursor:pointer;box-shadow:0 1px 5px rgba(0,0,0,.07);transition:all .15s;display:flex;align-items:center;justify-content:center}
+.num-btn:hover{border-color:var(--gold);transform:translateY(-2px) scale(1.07)}
 .num-btn:active{transform:scale(.93)}
 .num-btn.busy{background:var(--teal);color:var(--gold);border-color:var(--teal)}
 
-/* ORDERS */
 .olist{display:flex;flex-direction:column;gap:9px}
 .ocard{background:#fff;border-radius:16px;padding:13px 14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;box-shadow:0 2px 9px rgba(0,0,0,.06);border-right:4px solid var(--teal2);animation:slIn .3s ease both}
 @keyframes slIn{from{opacity:0;transform:translateX(-12px)}}
@@ -100,54 +86,45 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--dark);
 .oactions{display:flex;gap:6px;flex-wrap:wrap}
 .abtn{padding:7px 11px;border:none;border-radius:9px;font-size:11px;font-weight:600;cursor:pointer;transition:all .14s}
 .abtn:active{transform:scale(.93)}
-.a-recall{background:#FFF3CD;color:#856404}.a-recall:hover{background:#FFE69C}
-.a-sound{background:#D1ECF1;color:#0C5460}.a-sound:hover{background:#BEE5EB}
-.a-done{background:var(--teal);color:#fff}.a-done:hover{background:var(--teal2)}
+.a-recall{background:#FFF3CD;color:#856404}
+.a-sound{background:#D1ECF1;color:#0C5460}
+.a-done{background:var(--teal);color:#fff}
 .empty-o{text-align:center;padding:36px 20px;color:#ccc}
 .empty-ico{font-size:44px;margin-bottom:8px}
 
-/* MODAL */
 .moverlay{position:fixed;inset:0;z-index:200;background:rgba(8,26,25,.82);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:18px}
 .moverlay.open{display:flex}
 .mbox{background:var(--cream);border-radius:24px;padding:24px 20px;width:100%;max-width:390px;max-height:90vh;overflow-y:auto;animation:popUp .35s cubic-bezier(.34,1.56,.64,1) both}
 .mtitle{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--teal);margin-bottom:14px}
 
-/* ORDER NUM DISPLAY */
 .on-display{background:var(--teal);border-radius:14px;padding:12px;text-align:center;margin-bottom:16px}
 .on-lbl{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:2px}
 .on-num{font-family:'Playfair Display',serif;font-size:50px;font-weight:900;color:var(--gold);line-height:1}
 
-/* TYPE CARDS */
 .tgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:14px}
 .tcard{padding:15px 9px;border:2px solid rgba(12,95,90,.14);border-radius:14px;background:#fff;font-size:13px;font-weight:600;cursor:pointer;text-align:center;transition:all .14s;line-height:1.4}
 .tcard .ico{font-size:22px;display:block;margin-bottom:4px}
 .tcard:hover{border-color:var(--teal);background:rgba(12,95,90,.04)}
 .tcard.sel{border-color:var(--teal);background:var(--teal);color:#fff}
 
-/* SELECTS */
 .srow{display:grid;grid-template-columns:1fr;gap:9px;margin-bottom:14px}
 .sgrp label{display:block;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal2);margin-bottom:5px}
-.sgrp select{width:100%;padding:11px 13px;border:2px solid rgba(12,95,90,.18);border-radius:11px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='%230C5F5A' stroke-width='2' fill='none'/%3E%3C/svg%3E") no-repeat left 12px center;appearance:none;cursor:pointer;color:var(--dark)}
+.sgrp select{width:100%;padding:11px 13px;border:2px solid rgba(12,95,90,.18);border-radius:11px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;background:#fff;appearance:none;cursor:pointer;color:var(--dark)}
 .sgrp select:focus{outline:none;border-color:var(--teal)}
 
 .mactions{display:flex;gap:9px;margin-top:6px}
 .mbtn{flex:1;padding:14px;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .14s}
 .mbtn:active{transform:scale(.96)}
 .mbtn-ok{background:var(--teal);color:#fff;box-shadow:0 3px 14px rgba(12,95,90,.28)}
-.mbtn-ok:hover{background:var(--teal2)}
 .mbtn-cn{background:rgba(0,0,0,.07);color:var(--dark)}
-.mbtn-cn:hover{background:rgba(0,0,0,.11)}
 
-/* ARCHIVE */
 .alist{margin-top:9px;max-height:55vh;overflow-y:auto}
 .aitem{display:flex;align-items:center;gap:11px;padding:9px 0;border-bottom:1px solid rgba(0,0,0,.06)}
-.aitem:last-child{border-bottom:none}
 .anum{background:var(--teal);color:var(--gold);font-family:'Playfair Display',serif;font-size:17px;font-weight:700;width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .ainfo{flex:1}
 .atype{font-size:12px;font-weight:600}
 .atime{font-size:10px;color:#aaa}
 
-/* DISPLAY */
 #displayScreen{background:var(--dark);min-height:100vh}
 .dtopbar{background:rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.06);padding:12px 18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
 .dbrand{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:var(--gold)}
@@ -171,12 +148,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--dark);
 .dempty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;color:rgba(255,255,255,.12);text-align:center;gap:9px;padding:36px}
 .dempty-ico{font-size:60px;opacity:.35}
 .dempty h2{font-family:'Playfair Display',serif;font-size:22px;color:rgba(255,255,255,.2)}
-.dempty p{font-size:12px}
 .dfooter{background:rgba(255,255,255,.02);border-top:1px solid rgba(255,255,255,.05);padding:9px 18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:7px}
 .dfi{font-size:10px;color:rgba(255,255,255,.28)}
 .dfi span{color:rgba(255,255,255,.5);font-weight:500}
 
-/* AUDIO WAVE */
 .aw{position:fixed;top:14px;left:50%;transform:translateX(-50%);background:var(--teal);border:2px solid var(--gold);border-radius:99px;padding:7px 18px;color:var(--gold);font-size:12px;font-weight:700;display:flex;align-items:center;gap:7px;opacity:0;pointer-events:none;z-index:9000;transition:opacity .3s;white-space:nowrap}
 .aw.show{opacity:1}
 .wbars{display:flex;align-items:flex-end;gap:2px;height:14px}
@@ -188,7 +163,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--dark);
 .wb:nth-child(5){height:7px;animation-delay:.4s}
 @keyframes wba{to{height:3px}}
 
-/* TOAST */
 .twrap{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:9999;display:flex;flex-direction:column;gap:7px;align-items:center;pointer-events:none}
 .toast{background:var(--dark);color:#fff;font-size:12px;font-weight:500;padding:10px 16px;border-radius:10px;border-left:3px solid var(--gold);white-space:nowrap;box-shadow:0 4px 18px rgba(0,0,0,.28);animation:tin .3s ease, tout .3s ease 2.7s forwards}
 @keyframes tin{from{opacity:0;transform:translateY(9px)}}
@@ -196,240 +170,52 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--dark);
 
 ::-webkit-scrollbar{width:4px}
 ::-webkit-scrollbar-thumb{background:rgba(12,95,90,.22);border-radius:99px}
-
 @media(max-width:420px){
   .num-grid{grid-template-columns:repeat(10,1fr);gap:3px}
   .num-btn{font-size:10px;border-radius:7px}
   .dgrid{grid-template-columns:repeat(2,1fr)}
 }
-
-/* TV MODE - Hide admin button on large screens (TV) */
 @media(min-width: 1024px) and (min-height: 600px){
-  .hbtn-admin{
-    display: none !important;
-  }
+  .hbtn-admin{display: none !important;}
 }
 </style>
 </head>
 <body>
 
-<!-- AUDIO WAVE -->
-<div class="aw" id="aw">
-  <div class="wbars"><div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div></div>
-  <span id="awTxt">Annonce...</span>
-</div>
+<div class="aw" id="aw"><div class="wbars"><div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div></div><span id="awTxt">Annonce...</span></div>
 
-<!-- SPLASH -->
-<div id="splash">
-  <div class="sp-pizza">🍕</div>
-  <div class="sp-logo">PIZZA<br><span>POCKET</span></div>
-  <div class="sp-sub">Une Pizza À Votre Mesure</div>
-  <div class="sp-bar"></div>
-</div>
+<div id="splash"><div class="sp-pizza">🍕</div><div class="sp-logo">PIZZA<br><span>POCKET</span></div><div class="sp-sub">Une Pizza À Votre Mesure</div><div class="sp-bar"></div></div>
 
-<!-- PIN UNIFIED (8 digits) -->
-<div id="pinScreen">
-  <div class="pin-card">
-    <div class="pin-logo">🔐 PIZZA <span>POCKET</span></div>
-    <div class="pin-hint">Code d'accès (8 chiffres)</div>
-    <div class="pin-dots" id="pinDots">
-      <div class="pin-dot" id="pd0"></div><div class="pin-dot" id="pd1"></div>
-      <div class="pin-dot" id="pd2"></div><div class="pin-dot" id="pd3"></div>
-      <div class="pin-dot" id="pd4"></div><div class="pin-dot" id="pd5"></div>
-      <div class="pin-dot" id="pd6"></div><div class="pin-dot" id="pd7"></div>
-    </div>
-    <div class="pin-grid">
-      <button class="pin-btn" onclick="pp('1')">1</button>
-      <button class="pin-btn" onclick="pp('2')">2</button>
-      <button class="pin-btn" onclick="pp('3')">3</button>
-      <button class="pin-btn" onclick="pp('4')">4</button>
-      <button class="pin-btn" onclick="pp('5')">5</button>
-      <button class="pin-btn" onclick="pp('6')">6</button>
-      <button class="pin-btn" onclick="pp('7')">7</button>
-      <button class="pin-btn" onclick="pp('8')">8</button>
-      <button class="pin-btn" onclick="pp('9')">9</button>
-      <button class="pin-btn pin-del" onclick="pdel()">⌫</button>
-      <button class="pin-btn" onclick="pp('0')">0</button>
-      <button class="pin-btn" onclick="pclr()" style="font-size:12px">✕</button>
-    </div>
-    <div class="pin-err" id="pinErr"></div>
-  </div>
-</div>
+<div id="pinScreen"><div class="pin-card"><div class="pin-logo">🔐 PIZZA <span>POCKET</span></div><div class="pin-hint">Code d'accès (8 chiffres)</div><div class="pin-dots" id="pinDots"><div class="pin-dot" id="pd0"></div><div class="pin-dot" id="pd1"></div><div class="pin-dot" id="pd2"></div><div class="pin-dot" id="pd3"></div><div class="pin-dot" id="pd4"></div><div class="pin-dot" id="pd5"></div><div class="pin-dot" id="pd6"></div><div class="pin-dot" id="pd7"></div></div><div class="pin-grid"><button class="pin-btn" onclick="pp('1')">1</button><button class="pin-btn" onclick="pp('2')">2</button><button class="pin-btn" onclick="pp('3')">3</button><button class="pin-btn" onclick="pp('4')">4</button><button class="pin-btn" onclick="pp('5')">5</button><button class="pin-btn" onclick="pp('6')">6</button><button class="pin-btn" onclick="pp('7')">7</button><button class="pin-btn" onclick="pp('8')">8</button><button class="pin-btn" onclick="pp('9')">9</button><button class="pin-btn pin-del" onclick="pdel()">⌫</button><button class="pin-btn" onclick="pp('0')">0</button><button class="pin-btn" onclick="pclr()" style="font-size:12px">✕</button></div><div class="pin-err" id="pinErr"></div></div></div>
 
-<!-- HOME -->
-<div id="home">
-  <div class="home-card">
-    <div class="home-brand">PIZZA<br><span>POCKET</span></div>
-    <div class="home-tag">Une Pizza À Votre Mesure</div>
-    <div class="home-btns" id="homeBtns">
-      <button class="hbtn hbtn-admin" onclick="requestAdminPin()">📱 Administration</button>
-      <button class="hbtn hbtn-display" onclick="requestDisplayPin()">📺 Affichage Client</button>
-    </div>
-    <div class="home-info">📞 0555 92 38 29 — 0798 38 96 86<br>@Pizzapocket_dz</div>
-  </div>
-</div>
+<div id="home"><div class="home-card"><div class="home-brand">PIZZA<br><span>POCKET</span></div><div class="home-tag">Une Pizza À Votre Mesure</div><div class="home-btns" id="homeBtns"><button class="hbtn hbtn-admin" onclick="requestAdminPin()">📱 Administration</button><button class="hbtn hbtn-display" onclick="requestDisplayPin()">📺 Affichage Client</button></div><div class="home-info">📞 0555 92 38 29 — 0798 38 96 86<br>@Pizzapocket_dz</div></div></div>
 
-<!-- ADMIN SCREEN -->
-<div id="adminScreen" class="screen">
-  <div class="topbar">
-    <div class="tb-brand">PIZZA <span>POCKET</span></div>
-    <div class="tb-right">
-      <span class="badge" id="cntBadge">0</span>
-      <button class="bsm bsm-gold" onclick="openArchive()">📦 Historique</button>
-      <button class="bsm" onclick="goHomeFromAdmin()">⬅ Accueil</button>
-    </div>
-  </div>
-  <div class="admin-body">
-    <div class="slbl">Numéro de commande — 00 à 99</div>
-    <div class="num-grid" id="numGrid"></div>
-    <div class="slbl" style="margin-top:22px">Commandes en attente</div>
-    <div class="olist" id="oList"></div>
-  </div>
-</div>
+<div id="adminScreen" class="screen"><div class="topbar"><div class="tb-brand">PIZZA <span>POCKET</span></div><div class="tb-right"><span class="badge" id="cntBadge">0</span><button class="bsm bsm-gold" onclick="openArchive()">📦 Historique</button><button class="bsm" onclick="showFbSetup()" id="fbBtn">🔥</button><button class="bsm" onclick="goHomeFromAdmin()">⬅ Accueil</button></div></div><div class="admin-body"><div class="slbl">Numéro de commande — 00 à 99</div><div class="num-grid" id="numGrid"></div><div class="slbl" style="margin-top:22px">Commandes en attente</div><div class="olist" id="oList"></div></div></div>
 
-<!-- DISPLAY SCREEN -->
-<div id="displayScreen" class="screen">
-  <div class="dtopbar">
-    <div>
-      <div class="dbrand">PIZZA <span>POCKET</span></div>
-      <div class="dtag">Une Pizza À Votre Mesure</div>
-    </div>
-    <div id="dclock" class="dclock"></div>
-  </div>
-  <div class="dbody" id="dbody"></div>
-  <div class="dfooter">
-    <div class="dfi">📞 <span>0555 92 38 29</span></div>
-    <div class="dfi">📞 <span>0798 38 96 86</span></div>
-    <div class="dfi">📍 <span>@Pizzapocket_dz</span></div>
-    <button class="bsm" onclick="goHomeFromDisplay()">⬅</button>
-  </div>
-</div>
+<div id="displayScreen" class="screen"><div class="dtopbar"><div><div class="dbrand">PIZZA <span>POCKET</span></div><div class="dtag">Une Pizza À Votre Mesure</div></div><div id="dclock" class="dclock"></div></div><div class="dbody" id="dbody"></div><div class="dfooter"><div class="dfi">📞 <span>0555 92 38 29</span></div><div class="dfi">📞 <span>0798 38 96 86</span></div><div class="dfi">📍 <span>@Pizzapocket_dz</span></div><button class="bsm" id="enableSoundBtnDisplay" onclick="enableSoundOnDisplay()">🔊 Activer le son</button><button class="bsm" onclick="goHomeFromDisplay()">⬅</button></div></div>
 
-<!-- PIN MODAL FOR ADMIN (4 digits) -->
-<div class="moverlay" id="adminPinModal">
-  <div class="pin-card" style="background:var(--dark);border:2px solid var(--gold);max-width:320px">
-    <div class="pin-logo" style="color:var(--gold)">🔐 ADMIN</div>
-    <div class="pin-hint">Code Administration (4 chiffres)</div>
-    <div class="pin-dots" id="adminPinDots">
-      <div class="pin-dot" id="apd0"></div><div class="pin-dot" id="apd1"></div>
-      <div class="pin-dot" id="apd2"></div><div class="pin-dot" id="apd3"></div>
-    </div>
-    <div class="pin-grid">
-      <button class="pin-btn" onclick="adminPinPress('1')">1</button>
-      <button class="pin-btn" onclick="adminPinPress('2')">2</button>
-      <button class="pin-btn" onclick="adminPinPress('3')">3</button>
-      <button class="pin-btn" onclick="adminPinPress('4')">4</button>
-      <button class="pin-btn" onclick="adminPinPress('5')">5</button>
-      <button class="pin-btn" onclick="adminPinPress('6')">6</button>
-      <button class="pin-btn" onclick="adminPinPress('7')">7</button>
-      <button class="pin-btn" onclick="adminPinPress('8')">8</button>
-      <button class="pin-btn" onclick="adminPinPress('9')">9</button>
-      <button class="pin-btn pin-del" onclick="adminPinDel()">⌫</button>
-      <button class="pin-btn" onclick="adminPinPress('0')">0</button>
-      <button class="pin-btn" onclick="adminPinClear()" style="font-size:12px">✕</button>
-    </div>
-    <div class="pin-err" id="adminPinErr"></div>
-    <button class="mbtn mbtn-cn" style="margin-top:12px" onclick="closeAdminPinModal()">Annuler</button>
-  </div>
-</div>
+<div class="moverlay" id="adminPinModal"><div class="pin-card" style="background:var(--dark);border:2px solid var(--gold);max-width:320px"><div class="pin-logo" style="color:var(--gold)">🔐 ADMIN</div><div class="pin-hint">Code Administration (4 chiffres)</div><div class="pin-dots" id="adminPinDots"><div class="pin-dot" id="apd0"></div><div class="pin-dot" id="apd1"></div><div class="pin-dot" id="apd2"></div><div class="pin-dot" id="apd3"></div></div><div class="pin-grid"><button class="pin-btn" onclick="adminPinPress('1')">1</button><button class="pin-btn" onclick="adminPinPress('2')">2</button><button class="pin-btn" onclick="adminPinPress('3')">3</button><button class="pin-btn" onclick="adminPinPress('4')">4</button><button class="pin-btn" onclick="adminPinPress('5')">5</button><button class="pin-btn" onclick="adminPinPress('6')">6</button><button class="pin-btn" onclick="adminPinPress('7')">7</button><button class="pin-btn" onclick="adminPinPress('8')">8</button><button class="pin-btn" onclick="adminPinPress('9')">9</button><button class="pin-btn pin-del" onclick="adminPinDel()">⌫</button><button class="pin-btn" onclick="adminPinPress('0')">0</button><button class="pin-btn" onclick="adminPinClear()" style="font-size:12px">✕</button></div><div class="pin-err" id="adminPinErr"></div><button class="mbtn mbtn-cn" style="margin-top:12px" onclick="closeAdminPinModal()">Annuler</button></div></div>
 
-<!-- PIN MODAL FOR DISPLAY (4 digits) -->
-<div class="moverlay" id="displayPinModal">
-  <div class="pin-card" style="background:var(--dark);border:2px solid var(--gold);max-width:320px">
-    <div class="pin-logo" style="color:var(--gold)">📺 AFFICHAGE</div>
-    <div class="pin-hint">Code Affichage (4 chiffres)</div>
-    <div class="pin-dots" id="displayPinDots">
-      <div class="pin-dot" id="dpd0"></div><div class="pin-dot" id="dpd1"></div>
-      <div class="pin-dot" id="dpd2"></div><div class="pin-dot" id="dpd3"></div>
-    </div>
-    <div class="pin-grid">
-      <button class="pin-btn" onclick="displayPinPress('1')">1</button>
-      <button class="pin-btn" onclick="displayPinPress('2')">2</button>
-      <button class="pin-btn" onclick="displayPinPress('3')">3</button>
-      <button class="pin-btn" onclick="displayPinPress('4')">4</button>
-      <button class="pin-btn" onclick="displayPinPress('5')">5</button>
-      <button class="pin-btn" onclick="displayPinPress('6')">6</button>
-      <button class="pin-btn" onclick="displayPinPress('7')">7</button>
-      <button class="pin-btn" onclick="displayPinPress('8')">8</button>
-      <button class="pin-btn" onclick="displayPinPress('9')">9</button>
-      <button class="pin-btn pin-del" onclick="displayPinDel()">⌫</button>
-      <button class="pin-btn" onclick="displayPinPress('0')">0</button>
-      <button class="pin-btn" onclick="displayPinClear()" style="font-size:12px">✕</button>
-    </div>
-    <div class="pin-err" id="displayPinErr"></div>
-    <button class="mbtn mbtn-cn" style="margin-top:12px" onclick="closeDisplayPinModal()">Annuler</button>
-  </div>
-</div>
+<div class="moverlay" id="displayPinModal"><div class="pin-card" style="background:var(--dark);border:2px solid var(--gold);max-width:320px"><div class="pin-logo" style="color:var(--gold)">📺 AFFICHAGE</div><div class="pin-hint">Code Affichage (4 chiffres)</div><div class="pin-dots" id="displayPinDots"><div class="pin-dot" id="dpd0"></div><div class="pin-dot" id="dpd1"></div><div class="pin-dot" id="dpd2"></div><div class="pin-dot" id="dpd3"></div></div><div class="pin-grid"><button class="pin-btn" onclick="displayPinPress('1')">1</button><button class="pin-btn" onclick="displayPinPress('2')">2</button><button class="pin-btn" onclick="displayPinPress('3')">3</button><button class="pin-btn" onclick="displayPinPress('4')">4</button><button class="pin-btn" onclick="displayPinPress('5')">5</button><button class="pin-btn" onclick="displayPinPress('6')">6</button><button class="pin-btn" onclick="displayPinPress('7')">7</button><button class="pin-btn" onclick="displayPinPress('8')">8</button><button class="pin-btn" onclick="displayPinPress('9')">9</button><button class="pin-btn pin-del" onclick="displayPinDel()">⌫</button><button class="pin-btn" onclick="displayPinPress('0')">0</button><button class="pin-btn" onclick="displayPinClear()" style="font-size:12px">✕</button></div><div class="pin-err" id="displayPinErr"></div><button class="mbtn mbtn-cn" style="margin-top:12px" onclick="closeDisplayPinModal()">Annuler</button></div></div>
 
-<!-- ORDER MODAL -->
-<div class="moverlay" id="orderModal">
-  <div class="mbox">
-    <div class="on-display">
-      <div class="on-lbl">Numéro de commande</div>
-      <div class="on-num" id="mNum">00</div>
-    </div>
-    <div class="tgrid">
-      <div class="tcard" id="tc-table"    onclick="selType('table')">   <span class="ico">🍽️</span>Table</div>
-      <div class="tcard" id="tc-chaise"   onclick="selType('chaise')">  <span class="ico">🪑</span>Chaise</div>
-      <div class="tcard" id="tc-emporter" onclick="selType('emporter')"><span class="ico">🛍️</span>À emporter</div>
-      <div class="tcard" id="tc-livraison"onclick="selType('livraison')"><span class="ico">🛵</span>Livraison</div>
-    </div>
-    <div id="tableDiv" style="display:none">
-      <div class="srow"><div class="sgrp">
-        <label>Table (1 – 5)</label>
-        <select id="selTable">
-          <option value="">— Choisir table —</option>
-          <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
-        </select>
-      </div></div>
-    </div>
-    <div id="chaiseDiv" style="display:none">
-      <div class="srow"><div class="sgrp">
-        <label>Chaise (1 – 4)</label>
-        <select id="selChaise">
-          <option value="">— Choisir chaise —</option>
-          <option>1</option><option>2</option><option>3</option><option>4</option>
-        </select>
-      </div></div>
-    </div>
-    <div class="mactions">
-      <button class="mbtn mbtn-cn" onclick="closeOM()">Annuler</button>
-      <button class="mbtn mbtn-ok" onclick="confirmOrder()">✅ Confirmer</button>
-    </div>
-  </div>
-</div>
+<div class="moverlay" id="orderModal"><div class="mbox"><div class="on-display"><div class="on-lbl">Numéro de commande</div><div class="on-num" id="mNum">00</div></div><div class="tgrid"><div class="tcard" id="tc-table" onclick="selType('table')"><span class="ico">🍽️</span>Table</div><div class="tcard" id="tc-chaise" onclick="selType('chaise')"><span class="ico">🪑</span>Chaise</div><div class="tcard" id="tc-emporter" onclick="selType('emporter')"><span class="ico">🛍️</span>À emporter</div><div class="tcard" id="tc-livraison" onclick="selType('livraison')"><span class="ico">🛵</span>Livraison</div></div><div id="tableDiv" style="display:none"><div class="srow"><div class="sgrp"><label>Table (1 – 5)</label><select id="selTable"><option value="">— Choisir table —</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div></div></div><div id="chaiseDiv" style="display:none"><div class="srow"><div class="sgrp"><label>Chaise (1 – 4)</label><select id="selChaise"><option value="">— Choisir chaise —</option><option>1</option><option>2</option><option>3</option><option>4</option></select></div></div></div><div class="mactions"><button class="mbtn mbtn-cn" onclick="closeOM()">Annuler</button><button class="mbtn mbtn-ok" onclick="confirmOrder()">✅ Confirmer</button></div></div></div>
 
-<!-- ARCHIVE MODAL -->
-<div class="moverlay" id="archiveModal">
-  <div class="mbox">
-    <div class="mtitle">📦 Historique</div>
-    <div class="alist" id="aList"></div>
-    <div class="mactions" style="margin-top:12px">
-      <button class="mbtn mbtn-cn" onclick="closeArchive()">Fermer</button>
-      <button class="mbtn" style="background:var(--red);color:#fff" onclick="clearArchive()">🗑️ Vider</button>
-    </div>
-  </div>
-</div>
+<div class="moverlay" id="archiveModal"><div class="mbox"><div class="mtitle">📦 Historique</div><div class="alist" id="aList"></div><div class="mactions" style="margin-top:12px"><button class="mbtn mbtn-cn" onclick="closeArchive()">Fermer</button><button class="mbtn" style="background:var(--red);color:#fff" onclick="clearArchive()">🗑️ Vider</button></div></div></div>
 
-<!-- TOAST -->
+<div class="moverlay" id="fbSetupModal" style="z-index:10000"><div class="mbox" style="max-width:420px"><div class="mtitle">🔥 إعداد Firebase (مرة واحدة فقط)</div><p style="font-size:12px;color:#666;margin-bottom:14px;line-height:1.8">لمزامنة التطبيق بين الأجهزة المختلفة، أدخل رابط قاعدة بيانات Firebase الخاصة بك.<br><strong>كيف تحصل عليه؟</strong> اذهب إلى <a href="https://console.firebase.google.com" target="_blank" style="color:var(--teal)">console.firebase.google.com</a> ← أنشئ مشروع ← Realtime Database ← انسخ الرابط</p><div class="sgrp" style="margin-bottom:14px"><label>رابط Firebase Realtime Database</label><input id="fbUrlInput" type="text" placeholder="https://your-app-default-rtdb.firebaseio.com" style="width:100%;padding:11px 13px;border:2px solid rgba(12,95,90,.18);border-radius:11px;font-family:'DM Sans',sans-serif;font-size:13px;background:#fff;color:var(--dark)"></div><p style="font-size:11px;color:#999;margin-bottom:14px">⚠️ تأكد من ضبط قواعد قاعدة البيانات على "read: true, write: true" في Firebase Console</p><div class="mactions"><button class="mbtn mbtn-cn" onclick="fbSetupSkip()">تخطي (نفس الجهاز فقط)</button><button class="mbtn mbtn-ok" onclick="fbSetupSave()">💾 حفظ</button></div></div></div>
+
 <div class="twrap" id="twrap"></div>
 
 <script>
-/* ═══════════════════════════════════
-   CONFIG
-═══════════════════════════════════ */
 const UNIFIED_PIN = '20302030';
 const ADMIN_PIN = '1234';
 const DISPLAY_PIN = '5678';
-const SK_O   = 'pizza_orders';
-const SK_A   = 'pizza_archive';
+const SK_O = 'pizza_orders';
+const SK_A = 'pizza_archive';
 const SK_SND = 'pizza_sound';
 const SK_CTR = 'pizza_counter';
 const SK_SESSION = 'pizza_session';
 
-/* ═══════════════════════════════════
-   STATE
-═══════════════════════════════════ */
 let orders = [];
 let archive = [];
 let curNum = null;
@@ -443,490 +229,139 @@ let adminPinBuf = '';
 let displayPinBuf = '';
 let currentMode = null;
 
-// Create BroadcastChannel for cross-browser communication
+let FB_URL = localStorage.getItem('pizza_fb_url') || '';
+let soundEnabled = false;
+
 let channel = null;
-try {
-    channel = new BroadcastChannel('pizza_channel');
-    channel.onmessage = (event) => {
-        if (event.data.type === 'orders_updated') {
-            loadOrders();
-            if (currentMode === 'admin') renderAdmin();
-            if (currentMode === 'display') renderDisplay();
-        }
-        if (event.data.type === 'sound_trigger' && currentMode === 'display') {
-            announceOrder(event.data.orderNum);
-        }
-    };
-} catch(e) { console.log('BroadcastChannel not supported'); }
+try { channel = new BroadcastChannel('pizza_channel'); channel.onmessage = (event) => { if (event.data.type === 'orders_updated') { loadOrders(); if (currentMode === 'admin') renderAdmin(); if (currentMode === 'display') renderDisplay(); } if (event.data.type === 'sound_trigger' && currentMode === 'display') { announceOrder(event.data.orderNum); } }; } catch(e) { console.log('BroadcastChannel not supported'); }
 
-/* ═══════════════════════════════════
-   STORAGE & SYNC
-═══════════════════════════════════ */
-function broadcastUpdate(type, data = null) {
-    if (channel) {
-        channel.postMessage({ type: type, data: data, timestamp: Date.now() });
-    }
-}
+let fbLastSoundTs = 0;
+async function fbSave(path, data) { try { await fetch(`${FB_URL}/${path}.json`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }); } catch(e) { console.warn('Firebase save failed', e); } }
+async function fbGet(path) { try { const r = await fetch(`${FB_URL}/${path}.json`); return await r.json(); } catch(e) { console.warn('Firebase get failed', e); return null; } }
 
-function saveOrders() {
-    localStorage.setItem(SK_O, JSON.stringify(orders));
-    broadcastUpdate('orders_updated');
-}
+let fbPollInt = null;
+let fbLastOrdersHash = '';
 
-function saveArchive() {
-    localStorage.setItem(SK_A, JSON.stringify(archive));
-}
-
-function saveAll() {
-    saveOrders();
-    saveArchive();
-}
-
-function loadOrders() {
-    try {
-        const saved = localStorage.getItem(SK_O);
-        if (saved) orders = JSON.parse(saved);
-        else orders = [];
-    } catch(e) { orders = []; }
-}
-
-function loadArchive() {
-    try {
-        const saved = localStorage.getItem(SK_A);
-        if (saved) archive = JSON.parse(saved);
-        else archive = [];
-    } catch(e) { archive = []; }
-}
-
-function loadAll() {
-    loadOrders();
-    loadArchive();
-}
-
-// Also listen to storage events as backup
-window.addEventListener('storage', function(e) {
-    if (e.key === SK_O) {
-        loadOrders();
-        if (currentMode === 'admin') renderAdmin();
-        if (currentMode === 'display') renderDisplay();
-    }
-    if (e.key === SK_SND && currentMode === 'display') {
-        checkAndPlaySound();
-    }
-});
-
-function nextNum(){
-    try{
-        let n = parseInt(localStorage.getItem(SK_CTR) || '0');
-        const lbl = String(n).padStart(2,'0');
-        localStorage.setItem(SK_CTR, String((n+1)%100));
-        return lbl;
-    } catch(e){ return '00'; }
-}
-
-/* ═══════════════════════════════════
-   SESSION MANAGEMENT
-═══════════════════════════════════ */
-function saveSession(mode){
-    const session = {
-        mode: mode,
-        timestamp: Date.now(),
-        expires: Date.now() + (24 * 60 * 60 * 1000)
-    };
-    localStorage.setItem(SK_SESSION, JSON.stringify(session));
-    currentMode = mode;
-}
-
-function checkSession(){
-    try{
-        const saved = localStorage.getItem(SK_SESSION);
-        if(saved){
-            const session = JSON.parse(saved);
-            if(session.expires > Date.now()){
-                if(session.mode === 'admin'){
-                    goToAdmin(true);
-                    return true;
-                } else if(session.mode === 'display'){
-                    goToDisplay(true);
-                    return true;
-                }
-            } else {
-                localStorage.removeItem(SK_SESSION);
+function startFbPolling() {
+    if (fbPollInt) clearInterval(fbPollInt);
+    if (!FB_URL) return;
+    fbPollInt = setInterval(async () => {
+        try {
+            const data = await fbGet('state');
+            if (!data) return;
+            const newHash = JSON.stringify(data.orders || []);
+            if (newHash !== fbLastOrdersHash) {
+                fbLastOrdersHash = newHash;
+                orders = data.orders || [];
+                localStorage.setItem(SK_O, JSON.stringify(orders));
+                if (currentMode === 'admin') renderAdmin();
+                if (currentMode === 'display') renderDisplay();
             }
-        }
-    } catch(e){}
-    return false;
+            if (data.archive) { archive = data.archive; localStorage.setItem(SK_A, JSON.stringify(archive)); }
+            if (currentMode === 'display' && data.sound && data.sound.ts > fbLastSoundTs && (Date.now() - data.sound.ts) < 15000) {
+                fbLastSoundTs = data.sound.ts;
+                if (soundEnabled) announceOrder(data.sound.n);
+                else toast("🔊 اضغط على زر تفعيل الصوت");
+            }
+        } catch(e) {}
+    }, 1500);
 }
+function stopFbPolling() { if (fbPollInt) clearInterval(fbPollInt); fbPollInt = null; }
 
-function clearSession(){
-    localStorage.removeItem(SK_SESSION);
-    currentMode = null;
-}
+function broadcastUpdate(type, data = null) { if (channel) channel.postMessage({ type: type, data: data, timestamp: Date.now() }); }
+async function saveOrders() { localStorage.setItem(SK_O, JSON.stringify(orders)); fbLastOrdersHash = JSON.stringify(orders); broadcastUpdate('orders_updated'); await fbSave('state/orders', orders); }
+async function saveArchive() { localStorage.setItem(SK_A, JSON.stringify(archive)); await fbSave('state/archive', archive); }
+async function saveAll() { await saveOrders(); await saveArchive(); }
+function loadOrders() { try { const saved = localStorage.getItem(SK_O); if (saved) orders = JSON.parse(saved); else orders = []; } catch(e) { orders = []; } }
+function loadArchive() { try { const saved = localStorage.getItem(SK_A); if (saved) archive = JSON.parse(saved); else archive = []; } catch(e) { archive = []; } }
+async function loadAll() { loadOrders(); loadArchive(); await syncFromFirebase(); }
+async function syncFromFirebase() { if (!FB_URL) return; try { const data = await fbGet('state'); if (data) { if (data.orders) { orders = data.orders; localStorage.setItem(SK_O, JSON.stringify(orders)); fbLastOrdersHash = JSON.stringify(orders); } if (data.archive) { archive = data.archive; localStorage.setItem(SK_A, JSON.stringify(archive)); } if (data.sound && data.sound.ts) fbLastSoundTs = data.sound.ts; } } catch(e) { console.warn('syncFromFirebase failed', e); } }
 
-/* ═══════════════════════════════════
-   UNIFIED PIN (8 digits)
-═══════════════════════════════════ */
+window.addEventListener('storage', function(e) { if (e.key === SK_O) { loadOrders(); if (currentMode === 'admin') renderAdmin(); if (currentMode === 'display') renderDisplay(); } if (e.key === SK_SND && currentMode === 'display') checkAndPlaySound(); });
+
+function nextNum(){ try{ let n = parseInt(localStorage.getItem(SK_CTR) || '0'); const lbl = String(n).padStart(2,'0'); localStorage.setItem(SK_CTR, String((n+1)%100)); return lbl; } catch(e){ return '00'; } }
+
+function saveSession(mode){ const session = { mode: mode, timestamp: Date.now(), expires: Date.now() + (24 * 60 * 60 * 1000) }; localStorage.setItem(SK_SESSION, JSON.stringify(session)); currentMode = mode; }
+function checkSession(){ try{ const saved = localStorage.getItem(SK_SESSION); if(saved){ const session = JSON.parse(saved); if(session.expires > Date.now()){ if(session.mode === 'admin'){ goToAdmin(true); return true; } else if(session.mode === 'display'){ goToDisplay(true); return true; } } else { localStorage.removeItem(SK_SESSION); } } } catch(e){} return false; }
+function clearSession(){ localStorage.removeItem(SK_SESSION); currentMode = null; }
+
 function pp(d){if(pinBuf.length>=8)return;pinBuf+=d;updatePinDots();if(pinBuf.length===8)setTimeout(checkUnifiedPin,80);}
 function pdel(){pinBuf=pinBuf.slice(0,-1);updatePinDots();}
 function pclr(){pinBuf='';updatePinDots();}
-function updatePinDots(){
-    for(let i=0;i<8;i++){
-        const d=document.getElementById('pd'+i);
-        if(d) d.classList.toggle('filled', i < pinBuf.length);
-    }
-    document.getElementById('pinErr').textContent='';
-}
-function checkUnifiedPin(){
-    if(pinBuf === UNIFIED_PIN){
-        document.getElementById('pinScreen').classList.remove('active');
-        showHome();
-    } else {
-        for(let i=0;i<8;i++){
-            const d=document.getElementById('pd'+i);
-            if(d) d.classList.add('error');
-        }
-        document.getElementById('pinErr').textContent='Code incorrect — réessayez';
-        setTimeout(()=>{pinBuf='';updatePinDots();},900);
-    }
-}
+function updatePinDots(){ for(let i=0;i<8;i++){ const d=document.getElementById('pd'+i); if(d) d.classList.toggle('filled', i < pinBuf.length); } document.getElementById('pinErr').textContent=''; }
+function checkUnifiedPin(){ if(pinBuf === UNIFIED_PIN){ document.getElementById('pinScreen').classList.remove('active'); showHome(); } else { for(let i=0;i<8;i++){ const d=document.getElementById('pd'+i); if(d) d.classList.add('error'); } document.getElementById('pinErr').textContent='Code incorrect — réessayez'; setTimeout(()=>{pinBuf='';updatePinDots();},900); } }
 
-/* ═══════════════════════════════════
-   ADMIN PIN MODAL (4 digits)
-═══════════════════════════════════ */
-function requestAdminPin(){
-    adminPinBuf='';
-    updateAdminPinDots();
-    document.getElementById('adminPinErr').textContent='';
-    document.getElementById('adminPinModal').classList.add('open');
-}
-function adminPinPress(d){
-    if(adminPinBuf.length>=4)return;
-    adminPinBuf+=d;
-    updateAdminPinDots();
-    if(adminPinBuf.length===4)setTimeout(checkAdminPin,80);
-}
+function requestAdminPin(){ adminPinBuf=''; updateAdminPinDots(); document.getElementById('adminPinErr').textContent=''; document.getElementById('adminPinModal').classList.add('open'); }
+function adminPinPress(d){ if(adminPinBuf.length>=4)return; adminPinBuf+=d; updateAdminPinDots(); if(adminPinBuf.length===4)setTimeout(checkAdminPin,80); }
 function adminPinDel(){adminPinBuf=adminPinBuf.slice(0,-1);updateAdminPinDots();}
 function adminPinClear(){adminPinBuf='';updateAdminPinDots();}
-function updateAdminPinDots(){
-    for(let i=0;i<4;i++){
-        const d=document.getElementById('apd'+i);
-        if(d) d.classList.toggle('filled', i < adminPinBuf.length);
-    }
-    document.getElementById('adminPinErr').textContent='';
-}
-function checkAdminPin(){
-    if(adminPinBuf === ADMIN_PIN){
-        closeAdminPinModal();
-        saveSession('admin');
-        goToAdmin(true);
-    } else {
-        for(let i=0;i<4;i++){
-            const d=document.getElementById('apd'+i);
-            if(d) d.classList.add('error');
-        }
-        document.getElementById('adminPinErr').textContent='Code incorrect (1234)';
-        setTimeout(()=>{adminPinBuf='';updateAdminPinDots();},900);
-    }
-}
-function closeAdminPinModal(){
-    document.getElementById('adminPinModal').classList.remove('open');
-    adminPinBuf='';
-}
+function updateAdminPinDots(){ for(let i=0;i<4;i++){ const d=document.getElementById('apd'+i); if(d) d.classList.toggle('filled', i < adminPinBuf.length); } document.getElementById('adminPinErr').textContent=''; }
+function checkAdminPin(){ if(adminPinBuf === ADMIN_PIN){ closeAdminPinModal(); saveSession('admin'); goToAdmin(true); } else { for(let i=0;i<4;i++){ const d=document.getElementById('apd'+i); if(d) d.classList.add('error'); } document.getElementById('adminPinErr').textContent='Code incorrect (1234)'; setTimeout(()=>{adminPinBuf='';updateAdminPinDots();},900); } }
+function closeAdminPinModal(){ document.getElementById('adminPinModal').classList.remove('open'); adminPinBuf=''; }
 
-/* ═══════════════════════════════════
-   DISPLAY PIN MODAL (4 digits)
-═══════════════════════════════════ */
-function requestDisplayPin(){
-    displayPinBuf='';
-    updateDisplayPinDots();
-    document.getElementById('displayPinErr').textContent='';
-    document.getElementById('displayPinModal').classList.add('open');
-}
-function displayPinPress(d){
-    if(displayPinBuf.length>=4)return;
-    displayPinBuf+=d;
-    updateDisplayPinDots();
-    if(displayPinBuf.length===4)setTimeout(checkDisplayPin,80);
-}
+function requestDisplayPin(){ displayPinBuf=''; updateDisplayPinDots(); document.getElementById('displayPinErr').textContent=''; document.getElementById('displayPinModal').classList.add('open'); }
+function displayPinPress(d){ if(displayPinBuf.length>=4)return; displayPinBuf+=d; updateDisplayPinDots(); if(displayPinBuf.length===4)setTimeout(checkDisplayPin,80); }
 function displayPinDel(){displayPinBuf=displayPinBuf.slice(0,-1);updateDisplayPinDots();}
 function displayPinClear(){displayPinBuf='';updateDisplayPinDots();}
-function updateDisplayPinDots(){
-    for(let i=0;i<4;i++){
-        const d=document.getElementById('dpd'+i);
-        if(d) d.classList.toggle('filled', i < displayPinBuf.length);
-    }
-    document.getElementById('displayPinErr').textContent='';
-}
-function checkDisplayPin(){
-    if(displayPinBuf === DISPLAY_PIN){
-        closeDisplayPinModal();
-        saveSession('display');
-        goToDisplay(true);
-    } else {
-        for(let i=0;i<4;i++){
-            const d=document.getElementById('dpd'+i);
-            if(d) d.classList.add('error');
-        }
-        document.getElementById('displayPinErr').textContent='Code incorrect (5678)';
-        setTimeout(()=>{displayPinBuf='';updateDisplayPinDots();},900);
-    }
-}
-function closeDisplayPinModal(){
-    document.getElementById('displayPinModal').classList.remove('open');
-    displayPinBuf='';
-}
+function updateDisplayPinDots(){ for(let i=0;i<4;i++){ const d=document.getElementById('dpd'+i); if(d) d.classList.toggle('filled', i < displayPinBuf.length); } document.getElementById('displayPinErr').textContent=''; }
+function checkDisplayPin(){ if(displayPinBuf === DISPLAY_PIN){ closeDisplayPinModal(); saveSession('display'); goToDisplay(true); } else { for(let i=0;i<4;i++){ const d=document.getElementById('dpd'+i); if(d) d.classList.add('error'); } document.getElementById('displayPinErr').textContent='Code incorrect (5678)'; setTimeout(()=>{displayPinBuf='';updateDisplayPinDots();},900); } }
+function closeDisplayPinModal(){ document.getElementById('displayPinModal').classList.remove('open'); displayPinBuf=''; }
 
-/* ═══════════════════════════════════
-   NAVIGATION
-═══════════════════════════════════ */
-function showHome(){
-    clearSession();
-    document.getElementById('home').classList.add('show');
-    document.getElementById('adminScreen').classList.remove('active');
-    document.getElementById('displayScreen').classList.remove('active');
-    stopAll();
-}
+function showHome(){ clearSession(); document.getElementById('home').classList.add('show'); document.getElementById('adminScreen').classList.remove('active'); document.getElementById('displayScreen').classList.remove('active'); stopAll(); }
 function goHomeFromAdmin(){showHome();}
 function goHomeFromDisplay(){showHome();}
-function goToAdmin(skipLoad = false){
-    document.getElementById('home').classList.remove('show');
-    document.getElementById('adminScreen').classList.add('active');
-    document.getElementById('displayScreen').classList.remove('active');
-    stopAll();
-    if(!skipLoad) loadAll();
-    renderAdmin();
-}
-function goToDisplay(skipLoad = false){
-    document.getElementById('home').classList.remove('show');
-    document.getElementById('adminScreen').classList.remove('active');
-    document.getElementById('displayScreen').classList.add('active');
-    if(!skipLoad) loadAll();
-    renderDisplay();
-    startClk();
-    dispInt = setInterval(() => {
-        loadAll();
-        renderDisplay();
-        checkAndPlaySound();
-    }, 1000);
-}
-function stopAll(){
-    if(dispInt) clearInterval(dispInt);
-    if(clkInt) clearInterval(clkInt);
-    dispInt = null;
-    clkInt = null;
-}
+async function goToAdmin(skipLoad = false){ document.getElementById('home').classList.remove('show'); document.getElementById('adminScreen').classList.add('active'); document.getElementById('displayScreen').classList.remove('active'); stopAll(); await loadAll(); renderAdmin(); startFbPolling(); }
+async function goToDisplay(skipLoad = false){ document.getElementById('home').classList.remove('show'); document.getElementById('adminScreen').classList.remove('active'); document.getElementById('displayScreen').classList.add('active'); await loadAll(); renderDisplay(); startClk(); startFbPolling(); }
+function stopAll(){ if(dispInt) clearInterval(dispInt); if(clkInt) clearInterval(clkInt); dispInt = null; clkInt = null; stopFbPolling(); }
 
-/* ═══════════════════════════════════
-   RENDER ADMIN
-═══════════════════════════════════ */
-function renderAdmin(){
-    const g = document.getElementById('numGrid');
-    g.innerHTML = '';
-    for(let i=0; i<100; i++){
-        const lbl = String(i).padStart(2,'0');
-        const b = document.createElement('button');
-        b.className = 'num-btn' + (orders.find(o=>o.number===lbl) ? ' busy' : '');
-        b.textContent = lbl;
-        b.onclick = () => openOM(lbl);
-        g.appendChild(b);
-    }
-    document.getElementById('cntBadge').textContent = orders.length + ' cmd';
-    const l = document.getElementById('oList');
-    if(!orders.length){
-        l.innerHTML = '<div class="empty-o"><div class="empty-ico">🍕</div><p>Aucune commande en attente</p></div>';
-        return;
-    }
-    l.innerHTML = orders.map(o => `
-        <div class="ocard">
-            <div class="onum">${o.number}</div>
-            <div class="oinfo">
-                <div class="otitle">${getTypeIcon(o.type)} ${getTypeLabel(o)}</div>
-                <div class="osub">${formatTime(o.time)}</div>
-            </div>
-            <div class="oactions">
-                <button class="abtn a-recall" onclick="recall('${o.number}',false)">📣 Rappel</button>
-                <button class="abtn a-sound" onclick="recall('${o.number}',true)">🔊 Son</button>
-                <button class="abtn a-done" onclick="completeOrder('${o.number}')">✅ Terminé</button>
-            </div>
-        </div>
-    `).join('');
-}
+function renderAdmin(){ const g = document.getElementById('numGrid'); g.innerHTML = ''; for(let i=0; i<100; i++){ const lbl = String(i).padStart(2,'0'); const b = document.createElement('button'); b.className = 'num-btn' + (orders.find(o=>o.number===lbl) ? ' busy' : ''); b.textContent = lbl; b.onclick = () => openOM(lbl); g.appendChild(b); } document.getElementById('cntBadge').textContent = orders.length + ' cmd'; const l = document.getElementById('oList'); if(!orders.length){ l.innerHTML = '<div class="empty-o"><div class="empty-ico">🍕</div><p>Aucune commande en attente</p></div>'; return; } l.innerHTML = orders.map(o => `<div class="ocard"><div class="onum">${o.number}</div><div class="oinfo"><div class="otitle">${getTypeIcon(o.type)} ${getTypeLabel(o)}</div><div class="osub">${formatTime(o.time)}</div></div><div class="oactions"><button class="abtn a-recall" onclick="recall('${o.number}',false)">📣 Rappel</button><button class="abtn a-sound" onclick="recall('${o.number}',true)">🔊 Son</button><button class="abtn a-done" onclick="completeOrder('${o.number}')">✅ Terminé</button></div></div>`).join(''); }
+function renderDisplay(){ const b = document.getElementById('dbody'); if(!orders.length){ b.innerHTML = '<div class="dempty"><div class="dempty-ico">🍕</div><h2>Aucune commande prête</h2><p>Les commandes apparaîtront ici</p></div>'; return; } b.innerHTML = `<div><div class="dslbl">Commandes Prêtes</div><div class="dgrid">${orders.map((o, i) => `<div class="dcard${newSet.has(o.number) ? ' dc-new' : ''}" style="animation-delay:${i * 0.055}s"><div class="dc-ico">${getTypeIcon(o.type)}</div><div class="dc-num">${o.number}</div><div class="dc-type">${getDisplayTypeLabel(o.type)}</div>${o.type === 'table' ? `<div class="dc-detail">Table N° ${o.table}</div>` : ''}${o.type === 'chaise' ? `<div class="dc-detail">Chaise N° ${o.chaise}</div>` : ''}<div class="dc-badge">${newSet.has(o.number) ? '🔔 Prêt !' : 'Prêt'}</div></div>`).join('')}</div></div>`; }
 
-/* ═══════════════════════════════════
-   RENDER DISPLAY
-═══════════════════════════════════ */
-function renderDisplay(){
-    const b = document.getElementById('dbody');
-    if(!orders.length){
-        b.innerHTML = '<div class="dempty"><div class="dempty-ico">🍕</div><h2>Aucune commande prête</h2><p>Les commandes apparaîtront ici</p></div>';
-        return;
-    }
-    b.innerHTML = `<div>
-        <div class="dslbl">Commandes Prêtes</div>
-        <div class="dgrid">
-            ${orders.map((o, i) => `
-                <div class="dcard${newSet.has(o.number) ? ' dc-new' : ''}" style="animation-delay:${i * 0.055}s">
-                    <div class="dc-ico">${getTypeIcon(o.type)}</div>
-                    <div class="dc-num">${o.number}</div>
-                    <div class="dc-type">${getDisplayTypeLabel(o.type)}</div>
-                    ${o.type === 'table' ? `<div class="dc-detail">Table N° ${o.table}</div>` : ''}
-                    ${o.type === 'chaise' ? `<div class="dc-detail">Chaise N° ${o.chaise}</div>` : ''}
-                    <div class="dc-badge">${newSet.has(o.number) ? '🔔 Prêt !' : 'Prêt'}</div>
-                </div>
-            `).join('')}
-        </div>
-    </div>`;
-}
+function openOM(num){ if(orders.find(o=>o.number===num)){ toast('Commande ' + num + ' déjà en cours'); return; } curNum = num; curType = null; document.getElementById('mNum').textContent = num; document.querySelectorAll('.tcard').forEach(c => c.classList.remove('sel')); document.getElementById('tableDiv').style.display = 'none'; document.getElementById('chaiseDiv').style.display = 'none'; document.getElementById('selTable').value = ''; document.getElementById('selChaise').value = ''; document.getElementById('orderModal').classList.add('open'); }
+function closeOM(){ document.getElementById('orderModal').classList.remove('open'); curNum = null; curType = null; }
+function selType(t){ curType = t; document.querySelectorAll('.tcard').forEach(c => c.classList.remove('sel')); document.getElementById('tc-' + t).classList.add('sel'); document.getElementById('tableDiv').style.display = t === 'table' ? 'block' : 'none'; document.getElementById('chaiseDiv').style.display = t === 'chaise' ? 'block' : 'none'; }
+function confirmOrder(){ if(!curType){ toast('Choisissez le type'); return; } let table = null, chaise = null; if(curType === 'table'){ table = document.getElementById('selTable').value; if(!table){ toast('Sélectionnez une table'); return; } } if(curType === 'chaise'){ chaise = document.getElementById('selChaise').value; if(!chaise){ toast('Sélectionnez une chaise'); return; } } const o = { number: curNum, type: curType, table: table, chaise: chaise, time: new Date().toISOString() }; orders.push(o); newSet.add(curNum); setTimeout(() => newSet.delete(curNum), 12000); saveAll(); triggerSound(curNum); renderAdmin(); closeOM(); toast('✅ Commande ' + curNum + ' confirmée'); }
 
-/* ═══════════════════════════════════
-   ORDER MODAL
-═══════════════════════════════════ */
-function openOM(num){
-    if(orders.find(o=>o.number===num)){
-        toast('Commande ' + num + ' déjà en cours');
-        return;
-    }
-    curNum = num;
-    curType = null;
-    document.getElementById('mNum').textContent = num;
-    document.querySelectorAll('.tcard').forEach(c => c.classList.remove('sel'));
-    document.getElementById('tableDiv').style.display = 'none';
-    document.getElementById('chaiseDiv').style.display = 'none';
-    document.getElementById('selTable').value = '';
-    document.getElementById('selChaise').value = '';
-    document.getElementById('orderModal').classList.add('open');
-}
-function closeOM(){
-    document.getElementById('orderModal').classList.remove('open');
-    curNum = null;
-    curType = null;
-}
-function selType(t){
-    curType = t;
-    document.querySelectorAll('.tcard').forEach(c => c.classList.remove('sel'));
-    document.getElementById('tc-' + t).classList.add('sel');
-    document.getElementById('tableDiv').style.display = t === 'table' ? 'block' : 'none';
-    document.getElementById('chaiseDiv').style.display = t === 'chaise' ? 'block' : 'none';
-}
-function confirmOrder(){
-    if(!curType){ toast('Choisissez le type'); return; }
-    let table = null, chaise = null;
-    if(curType === 'table'){
-        table = document.getElementById('selTable').value;
-        if(!table){ toast('Sélectionnez une table'); return; }
-    }
-    if(curType === 'chaise'){
-        chaise = document.getElementById('selChaise').value;
-        if(!chaise){ toast('Sélectionnez une chaise'); return; }
-    }
-    const o = {
-        number: curNum,
-        type: curType,
-        table: table,
-        chaise: chaise,
-        time: new Date().toISOString()
-    };
-    orders.push(o);
-    newSet.add(curNum);
-    setTimeout(() => newSet.delete(curNum), 12000);
-    saveAll();
-    triggerSound(curNum);
-    renderAdmin();
-    closeOM();
-    toast('✅ Commande ' + curNum + ' confirmée');
-}
+function recall(n, playSound){ if(playSound){ triggerSound(n); } toast('📣 Commande ' + n + ' rappelée'); }
+function completeOrder(n){ const index = orders.findIndex(o => o.number === n); if(index !== -1){ archive.unshift({...orders[index], completedTime: new Date().toISOString()}); orders.splice(index, 1); saveAll(); renderAdmin(); toast('🎉 Commande ' + n + ' terminée'); } }
 
-/* ═══════════════════════════════════
-   RECALL / COMPLETE
-═══════════════════════════════════ */
-function recall(n, playSound){
-    if(playSound){
-        triggerSound(n);
-    }
-    toast('📣 Commande ' + n + ' rappelée');
-}
-function completeOrder(n){
-    const index = orders.findIndex(o => o.number === n);
-    if(index !== -1){
-        archive.unshift({...orders[index], completedTime: new Date().toISOString()});
-        orders.splice(index, 1);
-        saveAll();
-        renderAdmin();
-        toast('🎉 Commande ' + n + ' terminée');
-    }
-}
-
-/* ═══════════════════════════════════
-   ARCHIVE
-═══════════════════════════════════ */
-function openArchive(){
-    const l = document.getElementById('aList');
-    l.innerHTML = !archive.length ? '<p style="text-align:center;color:#aaa;padding:18px">Aucun historique</p>' :
-        archive.slice(0,50).map(o => `<div class="aitem"><div class="anum">${o.number}</div><div class="ainfo"><div class="atype">${getTypeIcon(o.type)} ${getTypeLabel(o)}</div><div class="atime">${formatTime(o.completedTime)}</div></div></div>`).join('');
-    document.getElementById('archiveModal').classList.add('open');
-}
+function openArchive(){ const l = document.getElementById('aList'); l.innerHTML = !archive.length ? '<p style="text-align:center;color:#aaa;padding:18px">Aucun historique</p>' : archive.slice(0,50).map(o => `<div class="aitem"><div class="anum">${o.number}</div><div class="ainfo"><div class="atype">${getTypeIcon(o.type)} ${getTypeLabel(o)}</div><div class="atime">${formatTime(o.completedTime)}</div></div></div>`).join(''); document.getElementById('archiveModal').classList.add('open'); }
 function closeArchive(){ document.getElementById('archiveModal').classList.remove('open'); }
 function clearArchive(){ archive = []; saveArchive(); closeArchive(); toast('🗑️ Historique vidé'); }
 
-/* ═══════════════════════════════════
-   SOUND ENGINE - ONLY ON DISPLAY
-═══════════════════════════════════ */
 let audioContext = null;
-function getAudioContext(){
-    if(!audioContext) audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    return audioContext;
-}
+function getAudioContext(){ if(!audioContext) audioContext = new (window.AudioContext || window.webkitAudioContext)(); return audioContext; }
+function playChime(callback){ const ctx = getAudioContext(); if(ctx.state === 'suspended') ctx.resume(); [[523,0,0.22],[659,0.28,0.22],[784,0.56,0.4]].forEach(([freq, startTime, duration]) => { const osc = ctx.createOscillator(); const gain = ctx.createGain(); osc.type = 'sine'; osc.frequency.value = freq; gain.gain.setValueAtTime(0, ctx.currentTime + startTime); gain.gain.linearRampToValueAtTime(0.6, ctx.currentTime + startTime + 0.03); gain.gain.linearRampToValueAtTime(0, ctx.currentTime + startTime + duration); osc.connect(gain); gain.connect(ctx.destination); osc.start(ctx.currentTime + startTime); osc.stop(ctx.currentTime + startTime + duration + 0.05); }); setTimeout(callback, 1100); }
+function numberToFrench(s){ const n = parseInt(s,10); const words = ['zéro','un','deux','trois','quatre','cinq','six','sept','huit','neuf','dix','onze','douze','treize','quatorze','quinze','seize','dix-sept','dix-huit','dix-neuf','vingt','vingt et un','vingt-deux','vingt-trois','vingt-quatre','vingt-cinq','vingt-six','vingt-sept','vingt-huit','vingt-neuf','trente','trente et un','trente-deux','trente-trois','trente-quatre','trente-cinq','trente-six','trente-sept','trente-huit','trente-neuf','quarante','quarante et un','quarante-deux','quarante-trois','quarante-quatre','quarante-cinq','quarante-six','quarante-sept','quarante-huit','quarante-neuf','cinquante','cinquante et un','cinquante-deux','cinquante-trois','cinquante-quatre','cinquante-cinq','cinquante-six','cinquante-sept','cinquante-huit','cinquante-neuf','soixante','soixante et un','soixante-deux','soixante-trois','soixante-quatre','soixante-cinq','soixante-six','soixante-sept','soixante-huit','soixante-neuf','soixante-dix','soixante et onze','soixante-douze','soixante-treize','soixante-quatorze','soixante-quinze','soixante-seize','soixante-dix-sept','soixante-dix-huit','soixante-dix-neuf','quatre-vingts','quatre-vingt-un','quatre-vingt-deux','quatre-vingt-trois','quatre-vingt-quatre','quatre-vingt-cinq','quatre-vingt-six','quatre-vingt-sept','quatre-vingt-huit','quatre-vingt-neuf','quatre-vingt-dix','quatre-vingt-onze','quatre-vingt-douze','quatre-vingt-treize','quatre-vingt-quatorze','quatre-vingt-quinze','quatre-vingt-seize','quatre-vingt-dix-sept','quatre-vingt-dix-huit','quatre-vingt-dix-neuf']; return words[n] || s; }
+function numberToArabic(s){ const n = parseInt(s,10); const words = ['صفر','واحد','اثنان','ثلاثة','أربعة','خمسة','ستة','سبعة','ثمانية','تسعة','عشرة','أحد عشر','اثنا عشر','ثلاثة عشر','أربعة عشر','خمسة عشر','ستة عشر','سبعة عشر','ثمانية عشر','تسعة عشر','عشرون','واحد وعشرون','اثنان وعشرون','ثلاثة وعشرون','أربعة وعشرون','خمسة وعشرون','ستة وعشرون','سبعة وعشرون','ثمانية وعشرون','تسعة وعشرون','ثلاثون','واحد وثلاثون','اثنان وثلاثون','ثلاثة وثلاثون','أربعة وثلاثون','خمسة وثلاثون','ستة وثلاثون','سبعة وثلاثون','ثمانية وثلاثون','تسعة وثلاثون','أربعون','واحد وأربعون','اثنان وأربعون','ثلاثة وأربعون','أربعة وأربعون','خمسة وأربعون','ستة وأربعون','سبعة وأربعون','ثمانية وأربعون','تسعة وأربعون','خمسون','واحد وخمسون','اثنان وخمسون','ثلاثة وخمسون','أربعة وخمسون','خمسة وخمسون','ستة وخمسون','سبعة وخمسون','ثمانية وخمسون','تسعة وخمسون','ستون','واحد وستون','اثنان وستون','ثلاثة وستون','أربعة وستون','خمسة وستون','ستة وستون','سبعة وستون','ثمانية وستون','تسعة وستون','سبعون','واحد وسبعون','اثنان وسبعون','ثلاثة وسبعون','أربعة وسبعون','خمسة وسبعون','ستة وسبعون','سبعة وسبعون','ثمانية وسبعون','تسعة وسبعون','ثمانون','واحد وثمانون','اثنان وثمانون','ثلاثة وثمانون','أربعة وثمانون','خمسة وثمانون','ستة وثمانون','سبعة وثمانون','ثمانية وثمانون','تسعة وثمانون','تسعون','واحد وتسعون','اثنان وتسعون','ثلاثة وتسعون','أربعة وتسعون','خمسة وتسعون','ستة وتسعون','سبعة وتسعون','ثمانية وتسعون','تسعة وتسعون']; return words[n] || s; }
 
-function playChime(callback){
+function enableSoundOnDisplay() {
     const ctx = getAudioContext();
-    if(ctx.state === 'suspended') ctx.resume();
-    [[523,0,0.22],[659,0.28,0.22],[784,0.56,0.4]].forEach(([freq, startTime, duration]) => {
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.type = 'sine';
-        osc.frequency.value = freq;
-        gain.gain.setValueAtTime(0, ctx.currentTime + startTime);
-        gain.gain.linearRampToValueAtTime(0.6, ctx.currentTime + startTime + 0.03);
-        gain.gain.linearRampToValueAtTime(0, ctx.currentTime + startTime + duration);
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.start(ctx.currentTime + startTime);
-        osc.stop(ctx.currentTime + startTime + duration + 0.05);
-    });
-    setTimeout(callback, 1100);
+    ctx.resume();
+    const synth = window.speechSynthesis;
+    synth.cancel();
+    const u = new SpeechSynthesisUtterance("Son activé pour l'affichage");
+    u.lang = "fr-FR";
+    synth.speak(u);
+    soundEnabled = true;
+    toast("✅ Son activé - les annonces fonctionnent maintenant");
 }
-
-function numberToFrench(s){
-    const n = parseInt(s,10);
-    const words = ['zéro','un','deux','trois','quatre','cinq','six','sept','huit','neuf','dix','onze','douze','treize','quatorze','quinze','seize','dix-sept','dix-huit','dix-neuf','vingt','vingt et un','vingt-deux','vingt-trois','vingt-quatre','vingt-cinq','vingt-six','vingt-sept','vingt-huit','vingt-neuf','trente','trente et un','trente-deux','trente-trois','trente-quatre','trente-cinq','trente-six','trente-sept','trente-huit','trente-neuf','quarante','quarante et un','quarante-deux','quarante-trois','quarante-quatre','quarante-cinq','quarante-six','quarante-sept','quarante-huit','quarante-neuf','cinquante','cinquante et un','cinquante-deux','cinquante-trois','cinquante-quatre','cinquante-cinq','cinquante-six','cinquante-sept','cinquante-huit','cinquante-neuf','soixante','soixante et un','soixante-deux','soixante-trois','soixante-quatre','soixante-cinq','soixante-six','soixante-sept','soixante-huit','soixante-neuf','soixante-dix','soixante et onze','soixante-douze','soixante-treize','soixante-quatorze','soixante-quinze','soixante-seize','soixante-dix-sept','soixante-dix-huit','soixante-dix-neuf','quatre-vingts','quatre-vingt-un','quatre-vingt-deux','quatre-vingt-trois','quatre-vingt-quatre','quatre-vingt-cinq','quatre-vingt-six','quatre-vingt-sept','quatre-vingt-huit','quatre-vingt-neuf','quatre-vingt-dix','quatre-vingt-onze','quatre-vingt-douze','quatre-vingt-treize','quatre-vingt-quatorze','quatre-vingt-quinze','quatre-vingt-seize','quatre-vingt-dix-sept','quatre-vingt-dix-huit','quatre-vingt-dix-neuf'];
-    return words[n] || s;
-}
-
-function numberToArabic(s){
-    const n = parseInt(s,10);
-    const words = ['صفر','واحد','اثنان','ثلاثة','أربعة','خمسة','ستة','سبعة','ثمانية','تسعة','عشرة','أحد عشر','اثنا عشر','ثلاثة عشر','أربعة عشر','خمسة عشر','ستة عشر','سبعة عشر','ثمانية عشر','تسعة عشر','عشرون','واحد وعشرون','اثنان وعشرون','ثلاثة وعشرون','أربعة وعشرون','خمسة وعشرون','ستة وعشرون','سبعة وعشرون','ثمانية وعشرون','تسعة وعشرون','ثلاثون','واحد وثلاثون','اثنان وثلاثون','ثلاثة وثلاثون','أربعة وثلاثون','خمسة وثلاثون','ستة وثلاثون','سبعة وثلاثون','ثمانية وثلاثون','تسعة وثلاثون','أربعون','واحد وأربعون','اثنان وأربعون','ثلاثة وأربعون','أربعة وأربعون','خمسة وأربعون','ستة وأربعون','سبعة وأربعون','ثمانية وأربعون','تسعة وأربعون','خمسون','واحد وخمسون','اثنان وخمسون','ثلاثة وخمسون','أربعة وخمسون','خمسة وخمسون','ستة وخمسون','سبعة وخمسون','ثمانية وخمسون','تسعة وخمسون','ستون','واحد وستون','اثنان وستون','ثلاثة وستون','أربعة وستون','خمسة وستون','ستة وستون','سبعة وستون','ثمانية وستون','تسعة وستون','سبعون','واحد وسبعون','اثنان وسبعون','ثلاثة وسبعون','أربعة وسبعون','خمسة وسبعون','ستة وسبعون','سبعة وسبعون','ثمانية وسبعون','تسعة وسبعون','ثمانون','واحد وثمانون','اثنان وثمانون','ثلاثة وثمانون','أربعة وثمانون','خمسة وثمانون','ستة وثمانون','سبعة وثمانون','ثمانية وثمانون','تسعة وثمانون','تسعون','واحد وتسعون','اثنان وتسعون','ثلاثة وتسعون','أربعة وتسعون','خمسة وتسعون','ستة وتسعون','سبعة وتسعون','ثمانية وتسعون','تسعة وتسعون'];
-    return words[n] || s;
-}
-
 function announceOrder(numStr){
+    if (!soundEnabled && currentMode === 'display') {
+        toast("🔊 Appuyez sur 'Activer le son' pour entendre les annonces");
+        showAudioWave("🔇 Son désactivé - Appuyez sur le bouton");
+        setTimeout(() => hideAudioWave(), 2000);
+        return;
+    }
     showAudioWave('🎙️ Annonce commande ' + numStr + '...');
     playChime(() => {
-        speakText(
-            `طلبيتك رقم ${numberToArabic(numStr)} جاهزة، تفضل من فضلك`,
-            'ar-SA', 1.0, 0.85, 1.02,
-            () => {
-                setTimeout(() => {
-                    speakText(
-                        `Commande numéro ${numberToFrench(numStr)}, votre commande est prête, veuillez vous présenter s'il vous plaît`,
-                        'fr-FR', 1.0, 0.87, 1.05,
-                        () => hideAudioWave()
-                    );
-                }, 450);
-            }
-        );
+        speakText(`طلبيتك رقم ${numberToArabic(numStr)} جاهزة، تفضل من فضلك`,'ar-SA', 1.0, 0.85, 1.02, () => {
+            setTimeout(() => {
+                speakText(`Commande numéro ${numberToFrench(numStr)}, votre commande est prête, veuillez vous présenter s'il vous plaît`,'fr-FR', 1.0, 0.87, 1.05, () => hideAudioWave());
+            }, 450);
+        });
     });
 }
-
 function speakText(text, lang, volume, rate, pitch, callback){
     if(!window.speechSynthesis){ if(callback) callback(); return; }
     const synth = window.speechSynthesis;
@@ -938,126 +373,62 @@ function speakText(text, lang, volume, rate, pitch, callback){
         utterance.rate = rate;
         utterance.pitch = pitch;
         const voices = synth.getVoices();
-        const femaleKeywords = ['female', 'femme', 'woman', 'samantha', 'fiona', 'amelie', 'marie', 'zuzana', 'paulina', 'monica', 'alice', 'victoria', 'google', 'natural', 'neural'];
         let bestVoice = null;
-        if(lang.startsWith('ar')) {
-            bestVoice = voices.find(v => v.lang === 'ar-SA' && (v.name.includes('Samantha') || v.name.includes('Zeina') || v.name.includes('Google')));
-            if(!bestVoice) bestVoice = voices.find(v => v.lang === 'ar-SA' && femaleKeywords.some(k => v.name.toLowerCase().includes(k)));
-            if(!bestVoice) bestVoice = voices.find(v => v.lang === 'ar-SA');
-            if(!bestVoice) bestVoice = voices.find(v => v.lang.startsWith('ar'));
-        } else if(lang.startsWith('fr')) {
-            bestVoice = voices.find(v => v.lang === 'fr-FR' && (v.name.includes('Amelie') || v.name.includes('Marie') || v.name.includes('Google') || v.name.includes('Fiona')));
-            if(!bestVoice) bestVoice = voices.find(v => v.lang === 'fr-FR' && femaleKeywords.some(k => v.name.toLowerCase().includes(k)));
-            if(!bestVoice) bestVoice = voices.find(v => v.lang === 'fr-FR');
-            if(!bestVoice) bestVoice = voices.find(v => v.lang.startsWith('fr'));
-        }
+        if(lang.startsWith('ar')) bestVoice = voices.find(v => v.lang === 'ar-SA' && (v.name.includes('Zeina') || v.name.includes('Google') || v.name.toLowerCase().includes('female'))) || voices.find(v => v.lang === 'ar-SA') || voices.find(v => v.lang.startsWith('ar'));
+        else if(lang.startsWith('fr')) bestVoice = voices.find(v => v.lang === 'fr-FR' && (v.name.includes('Amelie') || v.name.includes('Marie') || v.name.includes('Google') || v.name.toLowerCase().includes('female'))) || voices.find(v => v.lang === 'fr-FR') || voices.find(v => v.lang.startsWith('fr'));
         if(bestVoice) utterance.voice = bestVoice;
         utterance.onend = () => { if(callback) callback(); };
         utterance.onerror = () => { if(callback) callback(); };
         synth.speak(utterance);
     };
-    if(synth.getVoices().length > 0){
-        doSpeak();
-    } else {
-        synth.onvoiceschanged = () => {
-            synth.onvoiceschanged = null;
-            doSpeak();
-        };
-        setTimeout(doSpeak, 250);
-    }
+    if(synth.getVoices().length > 0) doSpeak();
+    else { synth.onvoiceschanged = () => { synth.onvoiceschanged = null; doSpeak(); }; setTimeout(doSpeak, 250); }
 }
-
-function triggerSound(orderNum){
+async function triggerSound(orderNum){
     try{
-        localStorage.setItem(SK_SND, JSON.stringify({n: orderNum, ts: Date.now()}));
+        const soundData = {n: orderNum, ts: Date.now()};
+        localStorage.setItem(SK_SND, JSON.stringify(soundData));
         broadcastUpdate('sound_trigger', { orderNum: orderNum });
+        fbLastSoundTs = soundData.ts;
+        await fbSave('state/sound', soundData);
     } catch(e){}
 }
-
 function checkAndPlaySound(){
     try{
         const soundData = localStorage.getItem(SK_SND);
         if(soundData && soundData !== lastSnd){
             lastSnd = soundData;
             const data = JSON.parse(soundData);
-            if(Date.now() - data.ts < 10000){
-                announceOrder(data.n);
-            }
+            if(Date.now() - data.ts < 10000) announceOrder(data.n);
         }
     } catch(e){}
 }
+function showAudioWave(text){ document.getElementById('awTxt').textContent = text; document.getElementById('aw').classList.add('show'); }
+function hideAudioWave(){ document.getElementById('aw').classList.remove('show'); }
 
-function showAudioWave(text){ 
-    document.getElementById('awTxt').textContent = text; 
-    document.getElementById('aw').classList.add('show'); 
-}
-function hideAudioWave(){ 
-    document.getElementById('aw').classList.remove('show'); 
-}
+function startClk(){ const el = document.getElementById('dclock'); const update = () => { el.textContent = new Date().toLocaleTimeString('fr-FR', {hour:'2-digit', minute:'2-digit'}); }; update(); clkInt = setInterval(update, 14000); }
+function getTypeIcon(type){ const icons = {table:'🍽️', chaise:'🪑', emporter:'🛍️', livraison:'🛵'}; return icons[type] || '🍕'; }
+function getDisplayTypeLabel(type){ const labels = {table:'Table numérotée', chaise:'Chaise numérotée', emporter:'À emporter', livraison:'Livraison'}; return labels[type] || ''; }
+function getTypeLabel(order){ if(order.type === 'table') return 'Table N° ' + order.table; if(order.type === 'chaise') return 'Chaise N° ' + order.chaise; if(order.type === 'emporter') return 'À emporter'; if(order.type === 'livraison') return 'Livraison'; return ''; }
+function formatTime(iso){ return new Date(iso).toLocaleTimeString('fr-FR', {hour:'2-digit', minute:'2-digit'}); }
+function toast(message){ const toastEl = document.createElement('div'); toastEl.className = 'toast'; toastEl.textContent = message; document.getElementById('twrap').appendChild(toastEl); setTimeout(() => toastEl.remove(), 3200); }
 
-/* ═══════════════════════════════════
-   CLOCK
-═══════════════════════════════════ */
-function startClk(){
-    const el = document.getElementById('dclock');
-    const update = () => {
-        el.textContent = new Date().toLocaleTimeString('fr-FR', {hour:'2-digit', minute:'2-digit'});
-    };
-    update();
-    clkInt = setInterval(update, 14000);
-}
-
-/* ═══════════════════════════════════
-   HELPERS
-═══════════════════════════════════ */
-function getTypeIcon(type){
-    const icons = {table:'🍽️', chaise:'🪑', emporter:'🛍️', livraison:'🛵'};
-    return icons[type] || '🍕';
-}
-function getDisplayTypeLabel(type){
-    const labels = {table:'Table numérotée', chaise:'Chaise numérotée', emporter:'À emporter', livraison:'Livraison'};
-    return labels[type] || '';
-}
-function getTypeLabel(order){
-    if(order.type === 'table') return 'Table N° ' + order.table;
-    if(order.type === 'chaise') return 'Chaise N° ' + order.chaise;
-    if(order.type === 'emporter') return 'À emporter';
-    if(order.type === 'livraison') return 'Livraison';
-    return '';
-}
-function formatTime(iso){
-    return new Date(iso).toLocaleTimeString('fr-FR', {hour:'2-digit', minute:'2-digit'});
-}
-function toast(message){
-    const toastEl = document.createElement('div');
-    toastEl.className = 'toast';
-    toastEl.textContent = message;
-    document.getElementById('twrap').appendChild(toastEl);
-    setTimeout(() => toastEl.remove(), 3200);
-}
-
-/* ═══════════════════════════════════
-   MODAL CLOSE ON BG
-═══════════════════════════════════ */
 document.getElementById('orderModal').addEventListener('click', function(e){ if(e.target === this) closeOM(); });
 document.getElementById('archiveModal').addEventListener('click', function(e){ if(e.target === this) closeArchive(); });
 
-/* ═══════════════════════════════════
-   INIT
-═══════════════════════════════════ */
-loadAll();
+function showFbSetup() { const saved = localStorage.getItem('pizza_fb_url'); if (saved) document.getElementById('fbUrlInput').value = saved; document.getElementById('fbSetupModal').classList.add('open'); }
+async function fbSetupSave() { const url = document.getElementById('fbUrlInput').value.trim().replace(/\/+$/, ''); if (!url.startsWith('https://')) { toast('⚠️ الرابط غير صحيح'); return; } localStorage.setItem('pizza_fb_url', url); FB_URL = url; document.getElementById('fbSetupModal').classList.remove('open'); toast('✅ تم حفظ Firebase — جاري المزامنة...'); await syncFromFirebase(); if (currentMode === 'admin') renderAdmin(); if (currentMode === 'display') renderDisplay(); startFbPolling(); }
+function fbSetupSkip() { document.getElementById('fbSetupModal').classList.remove('open'); }
 
-if(!checkSession()){
-    setTimeout(() => {
-        document.getElementById('splash').classList.add('hide');
+(async () => {
+    await loadAll();
+    if(!checkSession()){
         setTimeout(() => {
-            document.getElementById('splash').style.display = 'none';
-            document.getElementById('pinScreen').classList.add('active');
-        }, 600);
-    }, 1700);
-} else {
-    document.getElementById('splash').style.display = 'none';
-}
+            document.getElementById('splash').classList.add('hide');
+            setTimeout(() => { document.getElementById('splash').style.display = 'none'; document.getElementById('pinScreen').classList.add('active'); }, 600);
+        }, 1700);
+    } else { document.getElementById('splash').style.display = 'none'; }
+})();
 </script>
 </body>
 </html>
